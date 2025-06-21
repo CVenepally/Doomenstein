@@ -1,0 +1,695 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\p4\\Personal\\SD\\Doomenstein\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Map.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\Map.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Actor.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\Actor.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Shaders\\Diffuse.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Run\\Data\\Shaders\\Diffuse.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\MapDefinition.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\MapDefinition.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\MapDefinition.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\MapDefinition.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Shaders\\DepthOnly.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Run\\Data\\Shaders\\DepthOnly.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\App.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\App.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Game.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\Game.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\ActorDefinition.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\ActorDefinition.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\ActorDefinition.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\ActorDefinition.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\WeaponDefinition.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\WeaponDefinition.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Renderer.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\PlayerController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\PlayerController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Actor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\Actor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Weapon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\Weapon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Weapon.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\Weapon.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Definitions\\WeaponDefinitions.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Run\\Data\\Definitions\\WeaponDefinitions.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\Vec3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\GameConfig.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Run\\Data\\GameConfig.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\PlayerController.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\PlayerController.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Definitions\\ActorDefinitions.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Run\\Data\\Definitions\\ActorDefinitions.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\IntRange.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\IntVec2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\MathUtils.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\MathUtils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Light.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\TileDefinition.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\TileDefinition.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\TileDefinition.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\TileDefinition.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Tile.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\Tile.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Tile.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C545328A-3546-464D-B293-FC4C0067E3F3}|Code\\Game\\Game.vcxproj|solutionrelative:Code\\Game\\Tile.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ShadowMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ShadowMap.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\Mat44.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\IndexBuffer.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\IndexBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ConstantBuffer.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ConstantBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\P4\\PERSONAL\\SD\\ENGINE\\CODE\\ENGINE\\MATH\\INTVEC2.HPP||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{979DE5FE-99EF-4DEE-92C0-0067F7774CB2}|..\\Engine\\Code\\Engine\\Engine.vcxproj|C:\\P4\\PERSONAL\\SD\\ENGINE\\CODE\\ENGINE\\RENDERER\\LIGHT.HPP||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Game.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Game.hpp",
+              "RelativeDocumentMoniker": "Code\\Game\\Game.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Game.hpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\Game.hpp [Read Only]",
+              "ViewState": "AgIAADEAAAAAAAAAAAAAAEkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-04-28T19:41:58.326Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "ShadowMap.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ShadowMap.hpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Renderer\\ShadowMap.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ShadowMap.hpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Renderer\\ShadowMap.hpp [Read Only]",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-10T03:47:30.714Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Renderer.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Renderer.cpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Renderer\\Renderer.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Renderer.cpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Renderer\\Renderer.cpp [Read Only]",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAAwIkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-10T05:37:09.068Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ShadowMap.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ShadowMap.cpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Renderer\\ShadowMap.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ShadowMap.cpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Renderer\\ShadowMap.cpp [Read Only]",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAFoAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-11T17:50:36.531Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MapDefinition.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\MapDefinition.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\MapDefinition.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\MapDefinition.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\MapDefinition.cpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-06-05T02:10:43.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Actor.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Actor.hpp",
+              "RelativeDocumentMoniker": "Code\\Game\\Actor.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Actor.hpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\Actor.hpp [Read Only]",
+              "ViewState": "AgIAAEEAAAAAAAAAAAApwGUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-11T22:34:00.239Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Map.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Map.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\Map.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Map.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\Map.cpp [Read Only]",
+              "ViewState": "AgIAACQFAAAAAAAAAAAMwDAFAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-04-28T19:25:37.194Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Diffuse.hlsl",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Shaders\\Diffuse.hlsl",
+              "RelativeDocumentMoniker": "Run\\Data\\Shaders\\Diffuse.hlsl",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Shaders\\Diffuse.hlsl [Read Only]",
+              "RelativeToolTip": "Run\\Data\\Shaders\\Diffuse.hlsl [Read Only]",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAADMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2025-05-11T21:34:21.671Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DepthOnly.hlsl",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Shaders\\DepthOnly.hlsl",
+              "RelativeDocumentMoniker": "Run\\Data\\Shaders\\DepthOnly.hlsl",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Shaders\\DepthOnly.hlsl [Read Only]",
+              "RelativeToolTip": "Run\\Data\\Shaders\\DepthOnly.hlsl [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2025-05-11T22:20:24.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Game.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Game.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\Game.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Game.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\Game.cpp [Read Only]",
+              "ViewState": "AgIAACYAAAAAAAAAAAAcwFYAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-06-05T04:44:59.641Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Map.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Map.hpp",
+              "RelativeDocumentMoniker": "Code\\Game\\Map.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Map.hpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\Map.hpp [Read Only]",
+              "ViewState": "AgIAAEgAAAAAAAAAAIAwwGgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-04-28T19:25:39.338Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MapDefinition.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\MapDefinition.hpp",
+              "RelativeDocumentMoniker": "Code\\Game\\MapDefinition.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\MapDefinition.hpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\MapDefinition.hpp [Read Only]",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAUwCsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-06-05T02:10:47.317Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Weapon.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Weapon.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\Weapon.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Weapon.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\Weapon.cpp [Read Only]",
+              "ViewState": "AgIAAKEAAAAAAAAAAAAowF0AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-13T01:49:14.862Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "App.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\App.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\App.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\App.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\App.cpp [Read Only]",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAUwG0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-12T00:45:47.559Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Actor.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Actor.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\Actor.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Actor.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\Actor.cpp [Read Only]",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAQwHQAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-11T22:34:10.746Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Renderer.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Renderer.hpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Renderer\\Renderer.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Renderer.hpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Renderer\\Renderer.hpp [Read Only]",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAAAKIAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-11T21:18:41.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Weapon.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Weapon.hpp",
+              "RelativeDocumentMoniker": "Code\\Game\\Weapon.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Weapon.hpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\Weapon.hpp [Read Only]",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-13T10:49:32.214Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PlayerController.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\PlayerController.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\PlayerController.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\PlayerController.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\PlayerController.cpp [Read Only]",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAMgBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-13T01:16:47.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "WeaponDefinition.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\WeaponDefinition.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\WeaponDefinition.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\WeaponDefinition.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\WeaponDefinition.cpp [Read Only]",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAMIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-13T01:49:03.124Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "PlayerController.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\PlayerController.hpp",
+              "RelativeDocumentMoniker": "Code\\Game\\PlayerController.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\PlayerController.hpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\PlayerController.hpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-13T06:54:49.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "WeaponDefinitions.xml",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Definitions\\WeaponDefinitions.xml",
+              "RelativeDocumentMoniker": "Run\\Data\\Definitions\\WeaponDefinitions.xml",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Definitions\\WeaponDefinitions.xml [Read Only]",
+              "RelativeToolTip": "Run\\Data\\Definitions\\WeaponDefinitions.xml [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-05-13T01:44:33.024Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Vec3.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\Vec3.cpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Math\\Vec3.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\Vec3.cpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Math\\Vec3.cpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-12T04:41:30.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "GameConfig.xml",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\GameConfig.xml",
+              "RelativeDocumentMoniker": "Run\\Data\\GameConfig.xml",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\GameConfig.xml [Read Only]",
+              "RelativeToolTip": "Run\\Data\\GameConfig.xml [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-05-12T04:25:56.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ActorDefinitions.xml",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Definitions\\ActorDefinitions.xml",
+              "RelativeDocumentMoniker": "Run\\Data\\Definitions\\ActorDefinitions.xml",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Run\\Data\\Definitions\\ActorDefinitions.xml [Read Only]",
+              "RelativeToolTip": "Run\\Data\\Definitions\\ActorDefinitions.xml [Read Only]",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAuwGgAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-05-13T01:40:11.855Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ActorDefinition.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\ActorDefinition.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\ActorDefinition.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\ActorDefinition.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\ActorDefinition.cpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-13T01:46:38.76Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ActorDefinition.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\ActorDefinition.hpp",
+              "RelativeDocumentMoniker": "Code\\Game\\ActorDefinition.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\ActorDefinition.hpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\ActorDefinition.hpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-13T01:46:48.215Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "IntVec2.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\IntVec2.hpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Math\\IntVec2.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\IntVec2.hpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Math\\IntVec2.hpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-13T08:35:47.519Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Tile.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Tile.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\Tile.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Tile.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\Tile.cpp [Read Only]",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAACsAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-13T03:00:04.252Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "IntRange.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\IntRange.cpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Math\\IntRange.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\IntRange.cpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Math\\IntRange.cpp [Read Only]",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowC0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-13T08:47:39.063Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "IntVec2.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\IntVec2.cpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Math\\IntVec2.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\IntVec2.cpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Math\\IntVec2.cpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-13T08:36:11.802Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "MathUtils.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\MathUtils.hpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Math\\MathUtils.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\MathUtils.hpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Math\\MathUtils.hpp [Read Only]",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-13T07:19:57.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "MathUtils.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\MathUtils.cpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Math\\MathUtils.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\MathUtils.cpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Math\\MathUtils.cpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-13T07:19:56.929Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "TileDefinition.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\TileDefinition.hpp",
+              "RelativeDocumentMoniker": "Code\\Game\\TileDefinition.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\TileDefinition.hpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\TileDefinition.hpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-13T02:24:42.533Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "TileDefinition.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\TileDefinition.cpp",
+              "RelativeDocumentMoniker": "Code\\Game\\TileDefinition.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\TileDefinition.cpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\TileDefinition.cpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-13T02:24:32.727Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Tile.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Tile.hpp",
+              "RelativeDocumentMoniker": "Code\\Game\\Tile.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Doomenstein\\Code\\Game\\Tile.hpp [Read Only]",
+              "RelativeToolTip": "Code\\Game\\Tile.hpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-13T02:59:54.526Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Light.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Light.hpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Renderer\\Light.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Light.hpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Renderer\\Light.hpp [Read Only]",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-13T02:44:16.497Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Light.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Light.cpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Renderer\\Light.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\Light.cpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Renderer\\Light.cpp [Read Only]",
+              "ViewState": "AgIAABwAAAAAAAAAAAAtwDYAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-13T02:45:01.322Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Mat44.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\Mat44.hpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Math\\Mat44.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Math\\Mat44.hpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Math\\Mat44.hpp [Read Only]",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAEoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-12T04:41:08.066Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "IndexBuffer.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\IndexBuffer.hpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Renderer\\IndexBuffer.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\IndexBuffer.hpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Renderer\\IndexBuffer.hpp [Read Only]",
+              "ViewState": "AgIAAAEAAAAAAAAAAAApwBkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-11T21:06:20.996Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "IndexBuffer.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\IndexBuffer.cpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Renderer\\IndexBuffer.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\IndexBuffer.cpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Renderer\\IndexBuffer.cpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-11T21:06:20.183Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "ConstantBuffer.hpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ConstantBuffer.hpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Renderer\\ConstantBuffer.hpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ConstantBuffer.hpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Renderer\\ConstantBuffer.hpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-11T21:06:15.48Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "ConstantBuffer.cpp",
+              "DocumentMoniker": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ConstantBuffer.cpp",
+              "RelativeDocumentMoniker": "..\\Engine\\Code\\Engine\\Renderer\\ConstantBuffer.cpp",
+              "ToolTip": "C:\\p4\\Personal\\SD\\Engine\\Code\\Engine\\Renderer\\ConstantBuffer.cpp [Read Only]",
+              "RelativeToolTip": "..\\Engine\\Code\\Engine\\Renderer\\ConstantBuffer.cpp [Read Only]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-11T21:06:10.469Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

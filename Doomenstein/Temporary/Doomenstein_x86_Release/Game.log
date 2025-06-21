@@ -1,0 +1,24 @@
+﻿  Actor.cpp
+  ActorDefinition.cpp
+  ActorHandle.cpp
+  AIController.cpp
+  App.cpp
+  Controller.cpp
+  Game.cpp
+  GameCommon.cpp
+  Main_Windows.cpp
+  Map.cpp
+  MapDefinition.cpp
+  PlayerController.cpp
+  Tile.cpp
+  TileDefinition.cpp
+  Weapon.cpp
+  WeaponDefinition.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 3549 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Game.vcxproj -> C:\p4\Personal\SD\Doomenstein\Temporary\Doomenstein_x86_Release\Doomenstein_Release_x86.exe
+  Copying Doomenstein_Release_x86.exe to C:\p4\Personal\SD\Doomenstein\Run...
+  C:\p4\Personal\SD\Doomenstein\Temporary\Doomenstein_x86_Release\Doomenstein_Release_x86.exe -> C:\p4\Personal\SD\Doomenstein\Run\Doomenstein_Release_x86.exe
+  1 File(s) copied

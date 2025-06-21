@@ -1,0 +1,9 @@
+﻿  Map.cpp
+  Generating code
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 3550 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Game.vcxproj -> C:\p4\Personal\SD\Doomenstein\Temporary\Doomenstein_x64_Release\Doomenstein_Release_x64.exe
+  Copying Doomenstein_Release_x64.exe to C:\p4\Personal\SD\Doomenstein\Run...
+  C:\p4\Personal\SD\Doomenstein\Temporary\Doomenstein_x64_Release\Doomenstein_Release_x64.exe -> C:\p4\Personal\SD\Doomenstein\Run\Doomenstein_Release_x64.exe
+  1 File(s) copied

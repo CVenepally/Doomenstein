@@ -1,0 +1,21 @@
+﻿  Actor.cpp
+  ActorDefinition.cpp
+  ActorHandle.cpp
+  AIController.cpp
+  App.cpp
+  Controller.cpp
+  Game.cpp
+  GameCommon.cpp
+  Main_Windows.cpp
+  Map.cpp
+  MapDefinition.cpp
+  PlayerController.cpp
+  Tile.cpp
+  TileDefinition.cpp
+  Weapon.cpp
+  WeaponDefinition.cpp
+  Generating Code...
+  Game.vcxproj -> C:\p4\Personal\SD\Doomenstein\Temporary\Doomenstein_x64_Debug\Doomenstein_Debug_x64.exe
+  Copying Doomenstein_Debug_x64.exe to C:\p4\Personal\SD\Doomenstein\Run...
+  C:\p4\Personal\SD\Doomenstein\Temporary\Doomenstein_x64_Debug\Doomenstein_Debug_x64.exe -> C:\p4\Personal\SD\Doomenstein\Run\Doomenstein_Debug_x64.exe
+  1 File(s) copied

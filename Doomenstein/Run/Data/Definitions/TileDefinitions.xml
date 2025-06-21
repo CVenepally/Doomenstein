@@ -1,0 +1,34 @@
+<Definitions>
+	<!--  <TileDefinition name="StoneFloor" isSolid="false" mapImagePixelColor="0,0,0" floorSpriteCoords="3,6" ceilingSpriteCoords="2,6"/>
+  TileDefinition name="WoodFloor" isSolid="false" mapImagePixelColor="48,48,48" floorSpriteCoords="0,6" ceilingSpriteCoords="2,6"/>
+  <TileDefinition name="BrickWall" isSolid="true" mapImagePixelColor="255,255,255" wallSpriteCoords="0,5"/>
+  <TileDefinition name="WoodWall" isSolid="true" mapImagePixelColor="143,136,82" wallSpriteCoords="1,6"/>
+  <TileDefinition name="OpenGrass" isSolid="false" mapImagePixelColor="0,128,0" floorSpriteCoords="2,1" ceilingSpriteCoords="4,3"/>
+  <TileDefinition name="OpenDirt" isSolid="false" mapImagePixelColor="127,51,0" floorSpriteCoords="5,2" ceilingSpriteCoords="4,3"/> -->
+
+	<TileDefinition name="StoneFloor"		isSolid="false" mapImagePixelColor="3,0,5"		 floorSpriteCoords="3,6" ceilingSpriteCoords="2,6"/>
+	<TileDefinition name="CobblestonePath"	isSolid="false" mapImagePixelColor="22,19,19"    floorSpriteCoords="2,3" ceilingSpriteCoords="2,6"/>
+	<TileDefinition name="StoneWall"		isSolid="true"	mapImagePixelColor="0,0,0"		 wallSpriteCoords="4,4"	 tileHeight="2"/> 
+	<TileDefinition name="WoodWall"			isSolid="true"	mapImagePixelColor="255,93,21"	 wallSpriteCoords="1,6"	 tileHeight="2"/>
+	<TileDefinition name="BrickWall"		isSolid="true"	mapImagePixelColor="57,13,2"	 wallSpriteCoords="0,5"	 tileHeight="2"/> 
+	<TileDefinition name="BlueWall"			isSolid="true"	mapImagePixelColor="0,36,255"	 wallSpriteCoords="2,5"	 tileHeight="2"/>
+	<TileDefinition name="BlueGoal"			isSolid="false"	mapImagePixelColor="246,0,255"	 floorSpriteCoords="4,6" isGoal="true"/>
+	<TileDefinition name="BlueFloor"		isSolid="false"	mapImagePixelColor="57,90,255"   floorSpriteCoords="4,7"/>
+	<TileDefinition name="GreenWall"		isSolid="true"	mapImagePixelColor="2,16,0"		 wallSpriteCoords="6,0"	tileHeight="2"/> 
+	<TileDefinition name="GreenGoal"		isSolid="false"	mapImagePixelColor="92,142,70"	 floorSpriteCoords="3,0" isGoal="true"/>
+	<TileDefinition name="GreenFloor"		isSolid="false"	mapImagePixelColor="78,255,0"	 floorSpriteCoords="3,1"/>
+	<TileDefinition name="YellowWall"		isSolid="true"	mapImagePixelColor="255,255,0"	 wallSpriteCoords="2,7" tileHeight="2"/>
+	<TileDefinition name="YellowGoal"		isSolid="false"	mapImagePixelColor="0,3,6"		 floorSpriteCoords="2,6" isGoal="true"/>
+	<TileDefinition name="YellowFloor"		isSolid="false"	mapImagePixelColor="255,67,0"	 floorSpriteCoords="3,2"/>
+	<TileDefinition name="RedWall"			isSolid="true"	mapImagePixelColor="245,0,0"	 wallSpriteCoords="4,5" tileHeight="2"/>
+	<TileDefinition name="RedGoal"			isSolid="false"	mapImagePixelColor="29,2,3"		 floorSpriteCoords="0,7" isGoal="true"/>
+	<TileDefinition name="RedFloor"			isSolid="false"	mapImagePixelColor="255,28,28"	 floorSpriteCoords="3,5"/>
+	<TileDefinition name="BlackWall"		isSolid="true"	mapImagePixelColor="6,6,6"		 wallSpriteCoords="0,4" tileHeight="2"/>
+	<TileDefinition name="Bridge"			isSolid="false"	mapImagePixelColor="195,37,0"	 floorSpriteCoords="0,6"/>
+	<TileDefinition name="Water"			isSolid="false"	mapImagePixelColor="0,246,255"	 floorSpriteCoords="5,7"/>
+	<TileDefinition name="Courtyard"		isSolid="false"	mapImagePixelColor="7,64,1"		 floorSpriteCoords="0,0"/>
+	<TileDefinition name="Light"			isSolid="false"	mapImagePixelColor="255,255,255" floorSpriteCoords="1,7"/>
+	<TileDefinition name="HellGate"			isSolid="true"	mapImagePixelColor="88,88,88"	 wallSpriteCoords="6,7"/>
+	
+	
+</Definitions>

@@ -1,2 +1,2 @@
 # Doomenstein
-A clone of the original DOOM that came out in 1993.  
+A clone of the classic 1993 DOOM  

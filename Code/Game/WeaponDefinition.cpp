@@ -34,6 +34,7 @@ WeaponDefinition::WeaponDefinition(XmlElement const& weaponDefElement)
 	m_meleeArc	   = ParseXmlAttribute(weaponDefElement, "meleeArc",     m_meleeArc);
 	m_meleeImpulse = ParseXmlAttribute(weaponDefElement, "meleeImpulse", m_meleeImpulse);
 	m_meleeDamage  = ParseXmlAttribute(weaponDefElement, "meleeDamage",  m_meleeDamage);
+	m_empoweredMeleeDamage = ParseXmlAttribute(weaponDefElement, "empoweredMeleeDamage", m_empoweredMeleeDamage);
 
 	XmlElement const* childElement = weaponDefElement.FirstChildElement();
 	

@@ -539,6 +539,28 @@ void Game::RenderGame()
 			g_theRenderer->BindTexture(&g_gameFont->GetTexture());
 			g_theRenderer->DrawVertexArray(m_currentMap->m_textVerts);
 
+			// Victory wash, drawn last so it covers the HUD and status text as it builds.
+			float courtyardFade = m_currentMap->GetCourtyardWinFadeFraction();
+
+			if(courtyardFade > 0.f)
+			{
+				std::vector<Vertex_PCU> fadeVerts;
+
+				Rgba8 fadeColor = Rgba8::WHITE;
+				fadeColor.a		= static_cast<uchar>(Lerp(0.f, 255.f, courtyardFade));
+
+				AddVertsForAABB2D(fadeVerts, playerController->m_screenCamera.m_viewportBounds, fadeColor);
+
+				g_theRenderer->SetModelConstants();
+				g_theRenderer->SetSamplerMode(SamplerMode::POINT_CLAMP);
+				g_theRenderer->SetRasterizerMode(RasterizerMode::SOLID_CULL_BACK);
+				g_theRenderer->SetDepthMode(DepthMode::READ_WRITE_LESS_EQUAL);
+				g_theRenderer->SetBlendMode(BlendMode::ALPHA);
+				g_theRenderer->BindShader(nullptr);
+				g_theRenderer->BindTexture(nullptr);
+				g_theRenderer->DrawVertexArray(fadeVerts);
+			}
+
 			g_theRenderer->EndCamera(playerController->m_screenCamera);
 			g_theRenderer->EndRenderEvent("UI Render");
 		}

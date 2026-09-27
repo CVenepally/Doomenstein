@@ -57,6 +57,10 @@ public:
 	float	   m_meleeImpulse = 0.f;
 	FloatRange m_meleeDamage  = FloatRange::ZERO;
 
+	// Damage this weapon reverts to once its wielder is empowered. Negative means the
+	// weapon has no empowered form and keeps its normal damage.
+	FloatRange m_empoweredMeleeDamage = FloatRange(-1.f, -1.f);
+
 	// HUD
 	Shader*					m_shader		 = nullptr;
 	Texture*				m_hudTexture     = nullptr;

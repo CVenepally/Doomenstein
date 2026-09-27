@@ -34,6 +34,8 @@ Actor::Actor(Map* map, std::string const& name, Vec3 const& position, EulerAngle
 	if(m_definition)
 	{
 		m_health = m_definition->m_health;
+		m_maxHealth = m_definition->m_health;
+		m_damageOnCollide = m_definition->m_damageOnCollide;
 		for(size_t weaponIndex = 0; weaponIndex < m_definition->m_weaponInventory.size(); ++weaponIndex)
 		{
 			std::string weaponName = m_definition->m_weaponInventory[weaponIndex];
@@ -116,6 +118,13 @@ void Actor::Update()
 		transform.SetTranslation3D(GetEyePosition());
 		DebugAddBasis(transform, 0.f, 0.25f, DebugRenderMode::USE_DEPTH);
 		DebugAddWorldWireframeCylinder(m_position, m_definition->m_physicsHeight, m_definition->m_physicsRadius, 0.f, Rgba8::WHITE, Rgba8::WHITE, DebugRenderMode::USE_DEPTH);
+
+		if(m_definition->m_faction == Faction::DEMON)
+		{
+			Vec3 healthTextPosition = m_position + Vec3(0.f, 0.f, m_definition->m_physicsHeight + 0.2f);
+
+			DebugAddWorldBillboardText(Stringf("%.0f / %.0f", m_health, m_maxHealth), healthTextPosition, 0.2f, Vec2(0.5f, 0.5f), 0.f, Rgba8::RED, Rgba8::RED, DebugRenderMode::USE_DEPTH);
+		}
 	}
 }
 
@@ -353,6 +362,33 @@ void Actor::AddToInventory(Weapon* weapon)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Actor::AddWeaponByName(std::string const& weaponName)
+{
+	// AddToInventory compares pointers, so a freshly allocated Weapon would never match
+	// an existing one. Check by definition name to keep unlocks idempotent across
+	// respawns and repeat captures.
+	for(size_t index = 0; index < m_weaponInventory.size(); ++index)
+	{
+		if(m_weaponInventory[index] && m_weaponInventory[index]->m_weaponDefinition->m_name == weaponName)
+		{
+			return false;
+		}
+	}
+
+	for(size_t index = 0; index < WeaponDefinition::s_weaponDefinitions.size(); ++index)
+	{
+		if(WeaponDefinition::s_weaponDefinitions[index].m_name == weaponName)
+		{
+			m_weaponInventory.push_back(new Weapon(&WeaponDefinition::s_weaponDefinitions[index], this));
+			return true;
+		}
+	}
+
+	DebuggerPrintf(Stringf("Tried to grant unknown weapon \"%s\"\n", weaponName.c_str()).c_str());
+	return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Actor::Attack()
 {	
 	m_currentWeapon->Fire();
@@ -468,7 +504,7 @@ void Actor::OnCollide(Actor* collidingActor)
 
 		if(!sameFaction && notNeutral)
 		{
-			collidingActor->TakeDamage(m_definition->m_damageOnCollide.GetRandomFloat(), this);
+			collidingActor->TakeDamage(m_damageOnCollide.GetRandomFloat(), this);
 		}
 	}	
 
@@ -500,9 +536,14 @@ void Actor::TakeDamage(float damage, Actor* attackingActor)
 		{
 			SetActorState(ActorState::HURTING);
 		}
+		// DYING is not set until DeathStateUpdate runs later this frame, so further hits
+		// can still land on a corpse. Award the kill only on the crossing, or a burst of
+		// plasma would score several kills for one death.
+		bool wasAlive = m_health >= 1.f;
+
 		m_health -= damage;
 
-		if(m_health < 1.f)
+		if(m_health < 1.f && wasAlive)
 		{
 			IncrementPlayerKillsOnAttackingPlayer(attackingActor);
 		}
@@ -517,30 +558,48 @@ void Actor::TakeDamage(float damage, Actor* attackingActor)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Actor::IncrementPlayerKillsOnAttackingPlayer(Actor* attackingActor)
 {
-
-	Actor* actor = nullptr;
-
-	if(attackingActor->m_owner)
+	if(!attackingActor)
 	{
-		actor = attackingActor->m_owner;
-	}
-	else
-	{
-		actor = attackingActor;
+		return;
 	}
 
-	PlayerController* myPlayerController = nullptr;
-	PlayerController* attackingActorPlayerController = nullptr;
+	// A projectile credits the actor that fired it, not itself.
+	Actor* killer = attackingActor->m_owner ? attackingActor->m_owner : attackingActor;
 
-	if(m_possessedController && actor->m_possessedController)
+	if(killer == this || !killer->m_possessedController || !killer->m_definition || !m_definition)
 	{
-		myPlayerController = dynamic_cast<PlayerController*>(m_possessedController);
-		attackingActorPlayerController = dynamic_cast<PlayerController*>(actor->m_possessedController);
+		return;
+	}
 
-		if(myPlayerController && attackingActorPlayerController)
-		{
-			attackingActorPlayerController->m_kills += 1;
-		}
+	PlayerController* killerPlayerController = dynamic_cast<PlayerController*>(killer->m_possessedController);
+
+	if(!killerPlayerController)
+	{
+		return;
+	}
+
+	// Score any hostile, so demons count alongside enemy players. Matching factions are
+	// skipped so friendly fire never pads the counter.
+	if(m_definition->m_faction == killer->m_definition->m_faction)
+	{
+		return;
+	}
+
+	killerPlayerController->m_kills += 1;
+
+	// Stacking combat upgrade at every threshold, so the reward keeps arriving rather
+	// than capping out after the first 15.
+	if(killerPlayerController->m_kills % KILLS_PER_COMBAT_UPGRADE == 0)
+	{
+		killerPlayerController->m_weaponDamageMultiplier	    *= COMBAT_DAMAGE_MULTIPLIER;
+		killerPlayerController->m_projectileSpeedMultiplier  *= COMBAT_PROJECTILE_SPEED_MULTIPLIER;
+		killerPlayerController->m_projectileSpreadMultiplier *= COMBAT_PROJECTILE_SPREAD_MULTIPLIER;
+
+		killerPlayerController->AddUpgradeNotification(Stringf("%d KILLS - DAMAGE +%.0f%%, PLASMA VELOCITY +%.0f%%, SPREAD -%.0f%%",
+			killerPlayerController->m_kills,
+			(COMBAT_DAMAGE_MULTIPLIER - 1.f) * 100.f,
+			(COMBAT_PROJECTILE_SPEED_MULTIPLIER - 1.f) * 100.f,
+			(1.f - COMBAT_PROJECTILE_SPREAD_MULTIPLIER) * 100.f));
 	}
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------

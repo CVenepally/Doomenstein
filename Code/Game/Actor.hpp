@@ -2,6 +2,7 @@
 
 #include "Engine/Math/Cylinder3D.hpp"
 #include "Engine/Math/EulerAngles.hpp"
+#include "Engine/Math/FloatRange.hpp"
 #include "Engine/Renderer/Light.hpp"
 #include "Engine/Math/Vec3.hpp"
 #include "Engine/Core/Rgba8.hpp"
@@ -69,6 +70,7 @@ public:
 	void CycleNextWeapon();
 	void CyclePrevWeapon();
 	void AddToInventory(Weapon* weapon);
+	bool AddWeaponByName(std::string const& weaponName);
 	void Attack();
 
 	void MoveInDirection(Vec3 const& direction, bool didJump = false);
@@ -112,6 +114,8 @@ public:
 	ActorHandle m_handle;
 
 	float m_health;
+	float m_maxHealth = 1.f;
+	FloatRange m_damageOnCollide;
 	
 	std::vector<Vertex_PCUTBN> m_verts;
 	std::vector<Vertex_PCU>	   m_unlitVerts;

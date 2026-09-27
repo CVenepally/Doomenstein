@@ -6,6 +6,7 @@
 #include "Game/Actor.hpp"
 #include "Game/Game.hpp"
 #include "Game/AIController.hpp"
+#include "Game/PlayerController.hpp"
 #include "Game/GameCommon.hpp"
 #include "Engine/Math/FloatRange.hpp"
 #include "Engine/Core/DebugRender.hpp"
@@ -23,6 +24,8 @@ Weapon::Weapon(WeaponDefinition* weaponDefinition, Actor* owner)
 	: m_weaponDefinition(weaponDefinition)
 	, m_owner(owner)
 {
+	m_meleeDamage = m_weaponDefinition->m_meleeDamage;
+
 	m_refireTimer = Timer(m_weaponDefinition->m_refireTime, g_game->m_gameClock);
 	m_animationTimer = Timer(0.0f, g_game->m_gameClock);
 	m_animationTimer.Start();
@@ -192,7 +195,16 @@ void Weapon::FirePistol()
 		shotResult.m_rayResult.m_rayForwardNormal = Vec3(shotResult.m_rayResult.m_rayForwardNormal.x, shotResult.m_rayResult.m_rayForwardNormal.y, 0.f).GetNormalized();
 
 		shotResult.m_hitActor->AddImpulse(shotResult.m_rayResult.m_rayForwardNormal * m_weaponDefinition->m_rayImpulse);
-		shotResult.m_hitActor->TakeDamage(m_weaponDefinition->m_rayDamage.GetRandomFloat(), m_owner);
+
+		PlayerController* owningPlayer = GetOwningPlayerController();
+		float			  rayDamage	   = m_weaponDefinition->m_rayDamage.GetRandomFloat();
+
+		if(owningPlayer)
+		{
+			rayDamage *= owningPlayer->m_weaponDamageMultiplier;
+		}
+
+		shotResult.m_hitActor->TakeDamage(rayDamage, m_owner);
 
 		SpawnInfo bloodSpawnInfo;
 		bloodSpawnInfo.m_actorName = "BloodSplatter";
@@ -222,11 +234,41 @@ void Weapon::FirePlasma()
 	spawnInfo.m_actorName = "PlasmaProjectile";
 	spawnInfo.m_orientation = m_owner->m_orientation;
 	spawnInfo.m_position = (m_owner->GetEyePosition() - m_owner->GetUpVector() * bottomOffSet) + m_owner->GetForwardVector() * forwardOffSet;
-	spawnInfo.m_velocity = GetRandomDirectionInCone(m_weaponDefinition->m_projectileCone) * m_weaponDefinition->m_projectileSpeed;
+	PlayerController* owningPlayer = GetOwningPlayerController();
+
+	float projectileCone  = m_weaponDefinition->m_projectileCone;
+	float projectileSpeed = m_weaponDefinition->m_projectileSpeed;
+
+	if(owningPlayer)
+	{
+		projectileCone	*= owningPlayer->m_projectileSpreadMultiplier;
+		projectileSpeed *= owningPlayer->m_projectileSpeedMultiplier;
+	}
+
+	spawnInfo.m_velocity = GetRandomDirectionInCone(projectileCone) * projectileSpeed;
 
 	Actor* projectile = m_owner->m_map->SpawnActor(spawnInfo);
 	projectile->m_owner = m_owner;
 	projectile->SetActorState(ActorState::WALKING);
+
+	// Damage is carried on the projectile instance rather than read from the shared
+	// definition at impact, so the shooter's upgrades travel with the bolt.
+	if(owningPlayer)
+	{
+		projectile->m_damageOnCollide.m_min *= owningPlayer->m_weaponDamageMultiplier;
+		projectile->m_damageOnCollide.m_max *= owningPlayer->m_weaponDamageMultiplier;
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PlayerController* Weapon::GetOwningPlayerController() const
+{
+	if(!m_owner)
+	{
+		return nullptr;
+	}
+
+	return dynamic_cast<PlayerController*>(m_owner->m_possessedController);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -244,7 +286,7 @@ void Weapon::Melee()
 
 				float meleeRange = m_weaponDefinition->m_meleeRange;
 				float meleeArc = m_weaponDefinition->m_meleeArc;
-				float meleeDamage = m_weaponDefinition->m_meleeDamage.GetRandomFloat();
+				float meleeDamage = m_meleeDamage.GetRandomFloat();
 
 				Vec3 attackStartPoint = m_owner->GetEyePosition() + m_owner->GetForwardVector() * m_owner->m_definition->m_physicsRadius;
 				Vec2 sectorStartPoint = attackStartPoint.GetXY2D();

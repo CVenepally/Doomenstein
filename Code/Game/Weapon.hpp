@@ -4,6 +4,7 @@
 #include "Game/Actor.hpp"
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class WeaponDefinition;
+class PlayerController;
 class SpriteAnimDefinition;
 
 struct Vec3;
@@ -27,6 +28,9 @@ public:
 
 	void Fire();
 
+	// Combat upgrades live on the firing player, so AI weapons stay unscaled.
+	PlayerController* GetOwningPlayerController() const;
+
 	void FirePistol();
 	void FirePlasma();
 	void Melee();
@@ -48,6 +52,10 @@ public:
 
 	Actor*			  m_owner = nullptr;
 	WeaponDefinition* m_weaponDefinition = nullptr;
+
+	// Seeded from the definition so a single wielder can be buffed without touching the
+	// shared, static WeaponDefinition that every other actor reads.
+	FloatRange		  m_meleeDamage;
 	WeaponState		  m_state = IDLE;
 	Timer			  m_refireTimer;
 	Timer			  m_animationTimer;

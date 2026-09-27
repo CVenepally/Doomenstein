@@ -1,6 +1,6 @@
 <Definitions>
   <!-- Pistol -->
-  <WeaponDefinition name="Pistol" refireTime="0.75" rayCount="1" rayCone="0.0" rayRange="40.0" rayDamage="10.0~15.0" rayImpulse="4.0">
+  <WeaponDefinition name="Pistol" refireTime="0.2222" rayCount="1" rayCone="0.0" rayRange="40.0" rayDamage="17.0~20.0" rayImpulse="4.0">
     <HUD shader="Default" baseTexture="Data/Images/Hud_Base.png" reticleTexture="Data/Images/Reticle.png" reticleSize="16,16" spriteSize="256,256" spritePivot="0.5,0.0">
       <Animation name="Idle" shader="Default" spriteSheet="Data/Images/Weapon_Pistol.png" cellCount="5,1" secondsPerFrame="0.1" startFrame="0" endFrame="0"/>
       <Animation name="Attack" shader="Default" spriteSheet="Data/Images/Weapon_Pistol.png" cellCount="5,1" secondsPerFrame="0.1" startFrame="1" endFrame="3" />
@@ -20,13 +20,13 @@
     </Sounds>
   </WeaponDefinition>
   <!-- Demon Melee -->
-  <WeaponDefinition name="DemonMelee" refireTime="2.0" meleeCount="1" meleeArc="180.0" meleeRange="0.75" meleeDamage="2.0~4.0" meleeImpulse="2.0">
+  <WeaponDefinition name="DemonMelee" refireTime="2.0" meleeCount="1" meleeArc="180.0" meleeRange="0.75" meleeDamage="1.0~2.0" empoweredMeleeDamage="2.0~4.0" meleeImpulse="2.0">
     <Sounds>
       <Sound sound="Fire" name="Data/Audio/DemonAttack.wav"/>
     </Sounds>
   </WeaponDefinition>
 	
-<WeaponDefinition name="HeavyDemonMelee" refireTime="2.5" meleeCount="3" meleeArc="180.0" meleeRange="1.75" meleeDamage="3.0~5.0" meleeImpulse="4.0">
+<WeaponDefinition name="HeavyDemonMelee" refireTime="2.5" meleeCount="3" meleeArc="180.0" meleeRange="1.75" meleeDamage="1.7~2.3" empoweredMeleeDamage="3.0~5.0" meleeImpulse="4.0">
 	<Sounds>
 		<Sound sound="Fire" name="Data/Audio/DemonAttack.wav"/>
 	</Sounds>

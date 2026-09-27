@@ -24,6 +24,7 @@ class	MapDefinition;
 class	Actor;
 class	Camera;
 class	SpawnInfo;
+class	PlayerController;
 class	NamedStrings;
 
 struct	LightConstants;
@@ -33,6 +34,16 @@ struct	RaycastResult;
 struct	ActorHandle;
 
 typedef std::vector<Actor*> ActorList;
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Objective banner shown under the clock for OBJECTIVE_MESSAGE_DURATION seconds.
+struct TimedStatusMessage
+{
+	std::string m_text;
+	Rgba8		m_color = Rgba8::WHITE;
+	bool		m_isFlashing = false;
+	Timer		m_timer;
+};
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Map
@@ -58,6 +69,9 @@ public:
 						
 	void				DebugPossessNext();
 						
+	// Drawn by Game::RenderGame on top of everything once the courtyard falls.
+	float				GetCourtyardWinFadeFraction() const;
+
 	static bool			Event_OnKillAllActors(EventArgs& args);
 	static bool			Event_OnDisplaySunSettings(EventArgs& args);
 	static bool			Event_DebugControlLighting(EventArgs& args);
@@ -101,6 +115,25 @@ private:
 	std::vector<Tile>	GetEightSurroundingTiles(int posX, int posY);
 
 	void				CheckGoalConditions();
+	void				AwardCaptureRewards();
+	void				ApplyPlayerProgressionToActor(PlayerController* player, Actor* actor);
+	void				ApplyEnemyHealthBonus(Actor* actor);
+	void				RestoreEnemyEmpoweredDamage(Actor* actor);
+
+	// Not const: IntRange::IsOnRange is non-const in the Engine.
+	bool				IsCaptureWindowOpen();
+	float				GetHoursUntilCaptureWindowCloses() const;
+	float				GetHoursUntilCaptureWindowOpens() const;
+	int					GetCaptureWindowOpenHour() const;
+	int					GetCaptureWindowCloseHour() const;
+	bool				IsPlayerInCourtyard();
+	Rgba8				GetFlashingTextColor(Rgba8 const& baseColor) const;
+	void				DisplayCaptureWindowStatus();
+	void				DisplayCourtyardStatus();
+	void				DisplayTimedStatusMessages();
+	void				AddTimedStatusMessage(std::string const& text, Rgba8 const& color, bool isFlashing);
+	void				CheckDayChangeNotification();
+	void				UpdateCourtyardWinSequence();
 
 	RaycastResult		RaycastVsActors(Vec3 const& startPosition, Vec3 const& fwdNormal, float distance, Actor* firingActor = nullptr);
 	RaycastResult		RaycastVsCeiling(Vec3 const& startPosition, Vec3 const& fwdNormal, float distance);
@@ -194,6 +227,22 @@ private:
 
 	int		   m_numDaysPassed = 0;
 	int		   m_hours = 0;
+	float	   m_timeOfDayHours = 0.f;
+	float	   m_enemyHealthBonus = 0.f;
+
+	Timer	   m_courtyardWinTimer;
+	bool	   m_hasWipedEnemiesForCourtyardWin = false;
+	bool	   m_areEnemiesEmpowered = false;
+	int		   m_lastNotifiedDay = 0;
+
+	// Transition latches so each objective banner fires once instead of every frame.
+	bool	   m_wasCaptureWindowOpen = false;
+	bool	   m_hasWarnedWindowClosing = false;
+	bool	   m_hasWarnedWindowOpening = false;
+	bool	   m_hasAnnouncedCourtyardReady = false;
+	bool	   m_hasAnnouncedCourtyardCaptured = false;
+
+	std::vector<TimedStatusMessage> m_statusMessages;
 
 
 };

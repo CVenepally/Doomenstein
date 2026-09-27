@@ -49,11 +49,107 @@ void PlayerController::Update()
 		}
 	}
 
-	if(m_deaths >= 3)
+	PruneExpiredUpgradeNotifications();
+
+	if(m_deaths >= PLAYER_LIVES)
 	{
 		g_game->ChangeGameState(GameState::LOST);
 	}
 
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void PlayerController::AddUpgradeNotification(std::string const& text)
+{
+	UpgradeNotification notification;
+	notification.m_text  = text;
+	notification.m_timer = Timer(UPGRADE_NOTIFICATION_DURATION, g_game->m_gameClock);
+	notification.m_timer.Start();
+
+	m_upgradeNotifications.push_back(notification);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void PlayerController::PruneExpiredUpgradeNotifications()
+{
+	for(int index = static_cast<int>(m_upgradeNotifications.size()) - 1; index >= 0; --index)
+	{
+		if(m_upgradeNotifications[index].m_timer.HasPeriodElapsed())
+		{
+			m_upgradeNotifications.erase(m_upgradeNotifications.begin() + index);
+		}
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void PlayerController::RenderUpgradeNotifications()
+{
+	if(m_upgradeNotifications.empty())
+	{
+		return;
+	}
+
+	// Same bottom-15% bar that Weapon::RenderHUD and the HUD text below use; banners
+	// stack upward from its top edge.
+	float viewportHeight = m_screenCamera.m_viewportBounds.m_maxs.y - m_screenCamera.m_viewportBounds.m_mins.y;
+	float hudBarTop		 = m_screenCamera.m_viewportBounds.m_mins.y + (viewportHeight * 0.15f);
+
+	float textScale  = 1.f / static_cast<float>(g_game->GetNumPlayerControllers());
+	float lineHeight = 45.f * textScale;
+
+	std::vector<Vertex_PCU> notificationVerts;
+
+	int notificationCount = static_cast<int>(m_upgradeNotifications.size());
+
+	for(int index = 0; index < notificationCount; ++index)
+	{
+		UpgradeNotification const& notification = m_upgradeNotifications[index];
+
+		// Newest sits against the bar and older ones ride above it, so a banner timing
+		// out at the top never shunts the others around.
+		int   slot		 = (notificationCount - 1) - index;
+		float lineBottom = hudBarTop + (lineHeight * static_cast<float>(slot));
+
+		AABB2 lineBox;
+		lineBox.m_mins = Vec2(m_screenCamera.m_viewportBounds.m_mins.x, lineBottom);
+		lineBox.m_maxs = Vec2(m_screenCamera.m_viewportBounds.m_maxs.x, lineBottom + lineHeight);
+
+		// Fade across the last quarter of the lifetime instead of blinking out.
+		Rgba8 textColor = Rgba8::GREEN;
+		float remaining = 1.f - notification.m_timer.GetElapsedFraction();
+		textColor.a		= static_cast<uchar>(Lerp(0.f, 255.f, GetClampedZeroToOne(remaining * 4.f)));
+
+		g_gameFont->AddVertsForTextInBox2D(notificationVerts, notification.m_text, lineBox, lineHeight * 0.55f, textColor, 0.8f, Vec2(0.5f, 0.5f), SHRINK_TO_FIT);
+	}
+
+	g_theRenderer->SetModelConstants();
+	g_theRenderer->SetSamplerMode(SamplerMode::POINT_CLAMP);
+	g_theRenderer->SetRasterizerMode(RasterizerMode::SOLID_CULL_BACK);
+	g_theRenderer->SetDepthMode(DepthMode::READ_WRITE_LESS_EQUAL);
+	g_theRenderer->SetBlendMode(BlendMode::ALPHA);
+	g_theRenderer->BindShader(nullptr);
+	g_theRenderer->BindTexture(&g_gameFont->GetTexture());
+	g_theRenderer->DrawVertexArray(notificationVerts);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float PlayerController::GetMaxHealth() const
+{
+	// GetActor goes through m_map, so only call this once the controller has one.
+	return GetMaxHealthFor(GetActor());
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float PlayerController::GetMaxHealthFor(Actor* actor) const
+{
+	float baseHealth = PLAYER_BASE_MAX_HEALTH;
+
+	if(actor && actor->m_definition)
+	{
+		baseHealth = actor->m_definition->m_health;
+	}
+
+	return baseHealth + m_healthUpgradeBonus;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -141,7 +237,7 @@ void PlayerController::RenderHUDInfoAndDeathOverlay()
 
 	if(controlledActor)
 	{
-		healthText = Stringf("%d", GetClamped(static_cast<int>(controlledActor->m_health), 0, 100));
+		healthText = Stringf("%d", GetClamped(static_cast<int>(controlledActor->m_health), 0, static_cast<int>(GetMaxHealth())));
 	}
 
 	std::string killsText = Stringf("%d", m_kills);
@@ -228,6 +324,8 @@ void PlayerController::RenderHUDInfoAndDeathOverlay()
 		g_theRenderer->DrawVertexArray(debugVerts);
 
 	}
+
+	RenderUpgradeNotifications();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -257,7 +355,7 @@ void PlayerController::UpdateKeyboardInput()
 
 	if(controlledActor)
 	{
-		moveSpeed = controlledActor->m_definition->m_walkSpeed;
+		moveSpeed = controlledActor->m_definition->m_walkSpeed * m_moveSpeedMultiplier;
 	}
 	else
 	{
@@ -283,7 +381,7 @@ void PlayerController::UpdateKeyboardInput()
 	{
 		if(controlledActor)
 		{
-			moveSpeed = controlledActor->m_definition->m_runSpeed;
+			moveSpeed = controlledActor->m_definition->m_runSpeed * m_moveSpeedMultiplier;
 		}
 		else
 		{
@@ -410,7 +508,7 @@ void PlayerController::UpdateXboxInput()
 
 	if(controlledActor)
 	{
-		moveSpeed = controlledActor->m_definition->m_walkSpeed;
+		moveSpeed = controlledActor->m_definition->m_walkSpeed * m_moveSpeedMultiplier;
 	}
 	else
 	{
@@ -434,7 +532,7 @@ void PlayerController::UpdateXboxInput()
 	{
 		if(controlledActor)
 		{
-			moveSpeed = controlledActor->m_definition->m_runSpeed;
+			moveSpeed = controlledActor->m_definition->m_runSpeed * m_moveSpeedMultiplier;
 		}
 		else
 		{
@@ -499,7 +597,7 @@ void PlayerController::HandleFreeFlyInput()
 
 	if(controlledActor)
 	{
-		moveSpeed = controlledActor->m_definition->m_walkSpeed;
+		moveSpeed = controlledActor->m_definition->m_walkSpeed * m_moveSpeedMultiplier;
 	}
 	else
 	{
@@ -525,7 +623,7 @@ void PlayerController::HandleFreeFlyInput()
 	{
 		if(controlledActor)
 		{
-			moveSpeed = controlledActor->m_definition->m_runSpeed;
+			moveSpeed = controlledActor->m_definition->m_runSpeed * m_moveSpeedMultiplier;
 		}
 		else
 		{

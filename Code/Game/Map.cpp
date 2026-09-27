@@ -6,6 +6,8 @@
 #include "Game/Actor.hpp"
 #include "Game/Game.hpp"
 #include "Game/PlayerController.hpp"
+#include "Game/Weapon.hpp"
+#include "Game/WeaponDefinition.hpp"
 #include "Game/GameCommon.hpp"
 #include "Engine/Core/Image.hpp"
 #include "Engine/Math/RaycastUtils.hpp"
@@ -124,6 +126,9 @@ void Map::DisplayTime()
 	int minutes = (elapsedTime % 3600) / 60;
 	int seconds = elapsedTime % 60;
 
+	// Fractional hours so lighting can switch on at half-hour boundaries such as 17:30.
+	m_timeOfDayHours = static_cast<float>(elapsedTime) / 3600.f;
+
 	std::string time = Stringf("Day %d\n\n%02d:%02d:%02d", m_numDaysPassed, m_hours, minutes, seconds);
 
 	g_gameFont->AddVertsForTextInBox2D(m_textVerts, time, AABB2(Vec2::ZERO, g_theWindow->GetClientDimensions().GetAsVec2()), 24.f, Rgba8::WHITE, 1.f, Vec2(0.5f, 0.95f), SHRINK_TO_FIT);
@@ -174,10 +179,10 @@ void Map::InitializeMapByImage(Image& mapImage)
 					{
 						Vec3 position = Vec3(tileBounds.m_mins.x + 0.5f, tileBounds.m_mins.y + 0.5f, 2.f);
 						Vec3 direction = Vec3::DOWN;
-						float innerRadius = 5.f;
-						float outerRadius = 10.f;
+						float innerRadius = 5.5f;
+						float outerRadius = 11.f;
 						float innerDot = 0.62f;
-						float outerDot = 0.33f;
+						float outerDot = 0.2f;
 						float intensity = 0.5f;
 						Light light = Light::CreateSpotLight(position, direction, innerRadius, outerRadius, innerDot, outerDot, intensity);
 
@@ -203,18 +208,34 @@ void Map::InitializeMapByImage(Image& mapImage)
 						m_mapLights.push_back(light);
 					}
 
-					if(tileType == "BrickWall" && x != 0 && y != 0)
+					if(tileType == "BrickWall")
 					{
+						// The light sits 3 units up, centered on a solid wall tile, so the closest
+						// floor it can ever reach is the neighbouring tile's edge at
+						// sqrt(0.5^2 + 3^2) = 3.04 units away. Any outerRadius at or below that
+						// lights nothing at all; radii here are measured against that floor.
 						Vec3 position = Vec3(tileBounds.m_mins.x + 0.5f, tileBounds.m_mins.y + 0.5f, 3.f);
-						float innerRadius = 0.5f;
-						float outerRadius = 3.f;
+						float innerRadius = 2.f;
+						float outerRadius = 5.f;
 						float intensity = 0.8f;
 
 						Light light = Light::CreatePointLight(position, innerRadius, outerRadius, intensity, Rgba8::ORANGE);
 						m_mapLights.push_back(light);
 					}
 
+					// Unlike the wall lights above, a Light tile is walkable floor, so its pool
+					// is not blocked by the tile it sits on. Paint one into the map image to
+					// place a light anywhere; no code change needed.
+					if(tileType == "Light")
+					{
+						Vec3 position = Vec3(tileBounds.m_mins.x + 0.5f, tileBounds.m_mins.y + 0.5f, 3.f);
+						float innerRadius = 2.f;
+						float outerRadius = 5.f;
+						float intensity = 0.8f;
 
+						Light light = Light::CreatePointLight(position, innerRadius, outerRadius, intensity, Rgba8::ORANGE);
+						m_mapLights.push_back(light);
+					}
 					break;
 				}
 			}
@@ -335,15 +356,18 @@ void Map::Update()
 
 	CheckGoalConditions();
 
-	if(m_hours < 7 || m_hours > 20)
-	{
-		CheckAndFillLights();
-	}
+	// Gating now lives inside CheckAndFillLights, because the three kinds of light come
+	// on at different times and actor lights ignore the clock entirely.
+	CheckAndFillLights();
 
-	if(m_isCourtyardCaptured)
-	{
-		m_game->ChangeGameState(GameState::WON);
-	}
+	DisplayCaptureWindowStatus();
+	DisplayCourtyardStatus();
+	DisplayTimedStatusMessages();
+	CheckDayChangeNotification();
+
+	// Runs the fade-to-white and enemy wipe, and only then hands over to the win screen.
+	UpdateCourtyardWinSequence();
+
 	SpawnNewPlayerIfPlayerControllerActorIsDead();
 }
 
@@ -527,6 +551,8 @@ void Map::UpdateAmbientLighting()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Map::CheckAndFillLights()
 {
+	// Actor lights travel with the actor rather than the world clock, so projectile
+	// glow shows at any hour.
 	for(Actor* actor : m_allActors)
 	{
 		if(actor && actor->m_definition->m_isLightSource)
@@ -538,8 +564,24 @@ void Map::CheckAndFillLights()
 		}
 	}
 
+	// Street lighting comes on at 17:30 and burns through until the capture window shuts
+	// at 07:00.
+	bool arePointLightsOn = (m_timeOfDayHours >= POINT_LIGHTS_ON_HOUR) || (m_hours < m_noCaptureHourRange.m_min);
+
+	// Objective lights mark a zone that can actually be taken right now, so they follow
+	// the same window CheckGoalConditions uses: lit from 22:00, dark from 07:00. A zone
+	// that has already been captured has had its intensity zeroed, so it stays dark.
+	bool areObjectiveLightsOn = !m_noCaptureHourRange.IsOnRange(m_hours);
+
 	for(Light const& light : m_mapLights)
 	{
+		bool isObjectiveLight = (light.m_lightType == static_cast<int>(LightType::SPOT));
+
+		if(isObjectiveLight ? !areObjectiveLightsOn : !arePointLightsOn)
+		{
+			continue;
+		}
+
 		if(IsValidPosition(light.m_position) && static_cast<int>(m_allLights.size()) < MAX_LIGHTS)
 		{
 			m_allLights.push_back(light);
@@ -646,6 +688,9 @@ void Map::SpawnNewPlayerIfPlayerControllerActorIsDead()
 
 			Actor* marineActor = SpawnActor(marineSpawnInfo);
 			playerController->Possess(marineActor);
+
+			// In-game respawn path, distinct from SpawnPlayer at map load.
+			ApplyPlayerProgressionToActor(playerController, marineActor);
 		}
 	}
 
@@ -867,6 +912,9 @@ void Map::SpawnPlayer()
 		if(playerController && (playerController->m_actorHandle == ActorHandle::INVALID))
 		{
 			playerController->Possess(marineActor);
+
+			// Map-load spawn path.
+			ApplyPlayerProgressionToActor(playerController, marineActor);
 			break;
 		}
 	}
@@ -894,6 +942,8 @@ Actor* Map::SpawnActor(SpawnInfo const& spawnInfo)
 
 			actor->m_velocity = spawnInfo.m_velocity;
 
+			ApplyEnemyHealthBonus(actor);
+
 			AddActorToList(actor, m_allActors);
 			m_currentUID += 1;
 			return actor;
@@ -912,13 +962,15 @@ Actor* Map::SpawnActor(SpawnInfo const& spawnInfo)
 
 	actor->m_velocity = spawnInfo.m_velocity;
 
+	ApplyEnemyHealthBonus(actor);
+
 	AddActorToList(actor, m_allActors);
 	m_currentUID += 1;
 
-	if(actor->m_definition->m_isLightSource)
-	{
-		m_allLights.push_back(actor->m_light);
-	}
+	// No light is registered here on purpose. The actor's light still sits at the
+	// definition's origin until PhysicsUpdate moves it, so adding it now would put a
+	// stray light at world origin for a frame. CheckAndFillLights picks it up once it
+	// has a real position.
 
 	return actor;
 }
@@ -932,6 +984,12 @@ Actor* Map::GetActorByHandle(ActorHandle const& handle)
 	}
 
  	int actorIndex = handle.GetIndex();
+
+	// A handle can outlive the list it indexes, so range check before subscripting.
+	if(actorIndex < 0 || actorIndex >= static_cast<int>(m_allActors.size()))
+	{
+		return nullptr;
+	}
 
 	if(!m_allActors[actorIndex])
 	{
@@ -1133,10 +1191,14 @@ std::vector<Tile> Map::GetEightSurroundingTiles(int posX, int posY)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Map::CheckGoalConditions()
 {
+	// Every one of these has to be cleared each frame. The counters are re-tallied below
+	// from player positions, so any that is missed stays latched at its last non-zero
+	// value and its zone keeps capturing after the player has walked away.
 	m_numPlayersOnGreen		= 0;
 	m_numPlayersOnYellow	= 0;
 	m_numPlayersOnRed		= 0;
 	m_numPlayersOnBlue		= 0;
+	m_numPlayersOnCourtyard	= 0;
 
 	if(m_noCaptureHourRange.IsOnRange(m_hours))
 	{
@@ -1243,6 +1305,7 @@ void Map::CheckGoalConditions()
 		}
 
 		m_numZonesCaptured += 1;
+		AwardCaptureRewards();
 	}
 	
 	if(!m_isYellowCaptured && m_yellowCapturePercent >= 100.f)
@@ -1256,6 +1319,7 @@ void Map::CheckGoalConditions()
 			}
 		}
 		m_numZonesCaptured += 1;
+		AwardCaptureRewards();
 	}
 
 	if(!m_isBlueCaptured && m_blueCapturePercent >= 100.f)
@@ -1271,6 +1335,7 @@ void Map::CheckGoalConditions()
 		}
 		
 		m_numZonesCaptured += 1;
+		AwardCaptureRewards();
 	}
 
 	if(!m_isRedCaptured && m_redCapturePercent >= 100.f)
@@ -1286,6 +1351,7 @@ void Map::CheckGoalConditions()
 		}
 
 		m_numZonesCaptured += 1;
+		AwardCaptureRewards();
 	}
 
 	if(m_numZonesCaptured >= 4)
@@ -1304,7 +1370,7 @@ void Map::CheckGoalConditions()
 
 			std::string capture = Stringf("Capturing Courtyard : %0.2f", m_courtyardCapturePercent);
 
-			g_gameFont->AddVertsForTextInBox2D(m_textVerts, capture, AABB2(Vec2::ZERO, g_theWindow->GetClientDimensions().GetAsVec2()), 18.f, Rgba8::GREEN, 1.f, Vec2(0.01f, 0.98f), SHRINK_TO_FIT);
+			g_gameFont->AddVertsForTextInBox2D(m_textVerts, capture, AABB2(Vec2::ZERO, g_theWindow->GetClientDimensions().GetAsVec2()), 18.f, GetFlashingTextColor(Rgba8::GREEN), 1.f, Vec2(0.01f, 0.98f), SHRINK_TO_FIT);
 
 		}
 		else if(!m_isCourtyardCaptured)
@@ -1321,6 +1387,452 @@ void Map::CheckGoalConditions()
 		}
 	}
 
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Map::AwardCaptureRewards()
+{
+	float healthUpgrade = 0.f;
+
+	if(m_numZonesCaptured == CAPTURE_UPGRADE_MILESTONE_FIRST)
+	{
+		healthUpgrade = CAPTURE_HEALTH_UPGRADE_FIRST;
+	}
+	else if(m_numZonesCaptured == CAPTURE_UPGRADE_MILESTONE_SECOND)
+	{
+		healthUpgrade = CAPTURE_HEALTH_UPGRADE_SECOND;
+	}
+
+	for(PlayerController* player : m_game->m_playerControllers)
+	{
+		if(!player)
+		{
+			continue;
+		}
+
+		Actor* playerActor = GetActorByHandle(player->m_actorHandle);
+
+		if(m_numZonesCaptured == PLASMA_UNLOCK_MILESTONE)
+		{
+			player->m_isPlasmaRifleUnlocked = true;
+
+			// Hand it over mid-life rather than making the player die for it. The flag
+			// is what persists; ApplyPlayerProgressionToActor re-grants it on respawn.
+			if(playerActor)
+			{
+				playerActor->AddWeaponByName("PlasmaRifle");
+			}
+
+			player->AddUpgradeNotification("PLASMA RIFLE UNLOCKED");
+		}
+
+		if(healthUpgrade > 0.f)
+		{
+			player->m_healthUpgradeBonus += healthUpgrade;
+
+			// Filling to the raised ceiling covers both halves of the reward at once: a
+			// hurt player is restored outright, an unhurt one keeps the extra headroom.
+			if(playerActor)
+			{
+				playerActor->m_health = player->GetMaxHealthFor(playerActor);
+			}
+
+			player->AddUpgradeNotification(Stringf("MAX HEALTH +%.0f - HEALTH RESTORED", healthUpgrade));
+		}
+
+		if(m_numZonesCaptured == MOVEMENT_UPGRADE_MILESTONE)
+		{
+			player->m_moveSpeedMultiplier *= MOVEMENT_UPGRADE_MULTIPLIER;
+
+			player->AddUpgradeNotification(Stringf("MOVEMENT SPEED +%.0f%%", (MOVEMENT_UPGRADE_MULTIPLIER - 1.f) * 100.f));
+		}
+	}
+
+	// The map keeps the running enemy bonus so future spawns inherit it, while demons
+	// already on the field are topped up here and now.
+	if(m_numZonesCaptured == ENEMY_HEALTH_UPGRADE_MILESTONE)
+	{
+		m_areEnemiesEmpowered = true;
+		m_enemyHealthBonus	 += ENEMY_HEALTH_UPGRADE;
+
+		for(Actor* actor : m_allActors)
+		{
+			if(!actor || !actor->m_definition || actor->m_definition->m_faction != Faction::DEMON)
+			{
+				continue;
+			}
+
+			if(actor->m_state == ActorState::DEAD || actor->m_state == ActorState::DYING)
+			{
+				continue;
+			}
+
+			actor->m_maxHealth += ENEMY_HEALTH_UPGRADE;
+			actor->m_health	   += ENEMY_HEALTH_UPGRADE;
+
+			RestoreEnemyEmpoweredDamage(actor);
+		}
+
+		for(PlayerController* player : m_game->m_playerControllers)
+		{
+			if(player)
+			{
+				player->AddUpgradeNotification(Stringf("DEMONS EMPOWERED - HEALTH +%.0f, DAMAGE RESTORED", ENEMY_HEALTH_UPGRADE));
+			}
+		}
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Map::GetCaptureWindowCloseHour() const
+{
+	// m_noCaptureHourRange is the blocked span, so it closes the instant that span starts.
+	return m_noCaptureHourRange.m_min;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int Map::GetCaptureWindowOpenHour() const
+{
+	// IsOnRange is inclusive, so the first capturable hour is one past the blocked end.
+	return (m_noCaptureHourRange.m_max + 1) % 24;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Map::IsCaptureWindowOpen()
+{
+	return !m_noCaptureHourRange.IsOnRange(m_hours);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float Map::GetHoursUntilCaptureWindowCloses() const
+{
+	float closeHour = static_cast<float>(GetCaptureWindowCloseHour());
+
+	// The window straddles midnight, so before it wraps we owe the rest of today too.
+	if(m_timeOfDayHours >= static_cast<float>(GetCaptureWindowOpenHour()))
+	{
+		return (24.f - m_timeOfDayHours) + closeHour;
+	}
+
+	return closeHour - m_timeOfDayHours;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float Map::GetHoursUntilCaptureWindowOpens() const
+{
+	float openHour = static_cast<float>(GetCaptureWindowOpenHour());
+
+	if(m_timeOfDayHours <= openHour)
+	{
+		return openHour - m_timeOfDayHours;
+	}
+
+	return (24.f - m_timeOfDayHours) + openHour;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Map::IsPlayerInCourtyard()
+{
+	for(PlayerController* player : m_game->m_playerControllers)
+	{
+		if(!player)
+		{
+			continue;
+		}
+
+		if(m_courtyardXGoalRange.IsOnRange(player->m_position.x) && m_courtyardYGoalRange.IsOnRange(player->m_position.y))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Rgba8 Map::GetFlashingTextColor(Rgba8 const& baseColor) const
+{
+	float totalSeconds = static_cast<float>(m_game->m_gameClock->GetTotalSeconds());
+	float pulse		   = 0.5f + (0.5f * SinDegrees(totalSeconds * 360.f * STATUS_TEXT_FLASH_HZ));
+
+	Rgba8 flashedColor = baseColor;
+	flashedColor.a	   = static_cast<uchar>(Lerp(60.f, 255.f, pulse));
+
+	return flashedColor;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Map::AddTimedStatusMessage(std::string const& text, Rgba8 const& color, bool isFlashing)
+{
+	TimedStatusMessage message;
+	message.m_text		= text;
+	message.m_color		= color;
+	message.m_isFlashing = isFlashing;
+	message.m_timer		= Timer(OBJECTIVE_MESSAGE_DURATION, m_game->m_gameClock);
+	message.m_timer.Start();
+
+	m_statusMessages.push_back(message);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Map::DisplayCaptureWindowStatus()
+{
+	AABB2 screenBox	  = AABB2(Vec2::ZERO, g_theWindow->GetClientDimensions().GetAsVec2());
+	bool  isWindowOpen = IsCaptureWindowOpen();
+
+	// Re-arm the warnings each time the window flips, so they fire once per cycle.
+	if(isWindowOpen != m_wasCaptureWindowOpen)
+	{
+		m_wasCaptureWindowOpen = isWindowOpen;
+
+		if(isWindowOpen)
+		{
+			m_hasWarnedWindowClosing = false;
+			AddTimedStatusMessage("CAPTURE WINDOW IS OPEN", Rgba8::CYAN, false);
+		}
+		else
+		{
+			m_hasWarnedWindowOpening = false;
+			AddTimedStatusMessage(Stringf("Capture window opens again at %02d:00", GetCaptureWindowOpenHour()), Rgba8::CYAN, false);
+		}
+	}
+
+	// The countdown is the one continuous readout; everything else is a timed banner.
+	if(isWindowOpen)
+	{
+		float hoursLeft = GetHoursUntilCaptureWindowCloses();
+
+		if(hoursLeft <= CAPTURE_COUNTDOWN_HOURS)
+		{
+			int minutesLeft = static_cast<int>(hoursLeft * 60.f);
+			int secondsLeft = static_cast<int>(hoursLeft * 3600.f) % 60;
+
+			g_gameFont->AddVertsForTextInBox2D(m_textVerts, Stringf("CAPTURE WINDOW CLOSES IN %02d:%02d", minutesLeft, secondsLeft), screenBox, 18.f, Rgba8::CYAN, 1.f, Vec2(0.5f, 0.90f), SHRINK_TO_FIT);
+		}
+		else if(hoursLeft <= CAPTURE_CLOSE_WARNING_HOURS && !m_hasWarnedWindowClosing)
+		{
+			m_hasWarnedWindowClosing = true;
+			AddTimedStatusMessage(Stringf("%d Hrs until capture window closes", static_cast<int>(ceilf(hoursLeft))), Rgba8::CYAN, false);
+		}
+	}
+	else
+	{
+		float hoursUntilOpen = GetHoursUntilCaptureWindowOpens();
+
+		if(hoursUntilOpen <= CAPTURE_COUNTDOWN_HOURS)
+		{
+			int minutesLeft = static_cast<int>(hoursUntilOpen * 60.f);
+			int secondsLeft = static_cast<int>(hoursUntilOpen * 3600.f) % 60;
+
+			g_gameFont->AddVertsForTextInBox2D(m_textVerts, Stringf("CAPTURE WINDOW OPENS IN %02d:%02d", minutesLeft, secondsLeft), screenBox, 18.f, Rgba8::CYAN, 1.f, Vec2(0.5f, 0.90f), SHRINK_TO_FIT);
+		}
+		else if(hoursUntilOpen <= CAPTURE_OPEN_WARNING_HOURS && !m_hasWarnedWindowOpening)
+		{
+			m_hasWarnedWindowOpening = true;
+			AddTimedStatusMessage(Stringf("%d Hrs until capture window opens", static_cast<int>(ceilf(hoursUntilOpen))), Rgba8::CYAN, false);
+		}
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Map::DisplayCourtyardStatus()
+{
+	AABB2 screenBox = AABB2(Vec2::ZERO, g_theWindow->GetClientDimensions().GetAsVec2());
+
+	if(m_isCourtyardCaptured)
+	{
+		if(!m_hasAnnouncedCourtyardCaptured)
+		{
+			m_hasAnnouncedCourtyardCaptured = true;
+			AddTimedStatusMessage("COURTYARD CAPTURED", Rgba8::GREEN, true);
+		}
+
+		return;
+	}
+
+	if(m_numZonesCaptured < 4)
+	{
+		return;
+	}
+
+	if(!m_hasAnnouncedCourtyardReady)
+	{
+		m_hasAnnouncedCourtyardReady = true;
+		AddTimedStatusMessage("Courtyard ready to capture - proceed to the center of the map", Rgba8::YELLOW, false);
+	}
+
+	// Left persistent on purpose: standing on the objective outside the window is the
+	// one case where nothing else on screen explains why the bar will not fill.
+	if(!IsCaptureWindowOpen() && IsPlayerInCourtyard())
+	{
+		g_gameFont->AddVertsForTextInBox2D(m_textVerts, Stringf("Capture window starts at %02d:00", GetCaptureWindowOpenHour()), screenBox, 18.f, Rgba8::ORANGE, 1.f, Vec2(0.01f, 0.94f), SHRINK_TO_FIT);
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Map::DisplayTimedStatusMessages()
+{
+	AABB2 screenBox = AABB2(Vec2::ZERO, g_theWindow->GetClientDimensions().GetAsVec2());
+
+	for(int index = static_cast<int>(m_statusMessages.size()) - 1; index >= 0; --index)
+	{
+		if(m_statusMessages[index].m_timer.HasPeriodElapsed())
+		{
+			m_statusMessages.erase(m_statusMessages.begin() + index);
+		}
+	}
+
+	for(int index = 0; index < static_cast<int>(m_statusMessages.size()); ++index)
+	{
+		TimedStatusMessage const& message = m_statusMessages[index];
+
+		Rgba8 color = message.m_isFlashing ? GetFlashingTextColor(message.m_color) : message.m_color;
+
+		// Stack below the clock so several can coexist without overlapping.
+		// Starts below the countdown slot at 0.90 so the two never collide.
+		float alignmentY = 0.86f - (0.035f * static_cast<float>(index));
+
+		g_gameFont->AddVertsForTextInBox2D(m_textVerts, message.m_text, screenBox, 20.f, color, 1.f, Vec2(0.5f, alignmentY), SHRINK_TO_FIT);
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Map::CheckDayChangeNotification()
+{
+	if(m_numDaysPassed == m_lastNotifiedDay)
+	{
+		return;
+	}
+
+	m_lastNotifiedDay = m_numDaysPassed;
+
+	for(PlayerController* player : m_game->m_playerControllers)
+	{
+		if(player)
+		{
+			player->AddUpgradeNotification("A NEW DAY BEGINS - ALL DEMONS HAVE RESPAWNED");
+		}
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float Map::GetCourtyardWinFadeFraction() const
+{
+	if(!m_isCourtyardCaptured || m_courtyardWinTimer.IsStopped())
+	{
+		return 0.f;
+	}
+
+	return GetClampedZeroToOne(m_courtyardWinTimer.GetElapsedFraction());
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Map::UpdateCourtyardWinSequence()
+{
+	if(!m_isCourtyardCaptured)
+	{
+		return;
+	}
+
+	if(m_courtyardWinTimer.IsStopped())
+	{
+		m_courtyardWinTimer = Timer(COURTYARD_WIN_FADE_SECONDS, m_game->m_gameClock);
+		m_courtyardWinTimer.Start();
+	}
+
+	// Wipe the map partway into the fade so the kill lands while the screen is still
+	// readable, rather than after it has already washed out.
+	if(!m_hasWipedEnemiesForCourtyardWin && m_courtyardWinTimer.GetElapsedFraction() >= COURTYARD_WIN_KILL_FRACTION)
+	{
+		m_hasWipedEnemiesForCourtyardWin = true;
+
+		for(Actor* actor : m_allActors)
+		{
+			if(!actor || !actor->m_definition || actor->m_definition->m_faction != Faction::DEMON)
+			{
+				continue;
+			}
+
+			if(actor->m_state == ActorState::DEAD || actor->m_state == ActorState::DYING)
+			{
+				continue;
+			}
+
+			actor->m_health = 0.f;
+			actor->SetActorState(ActorState::DYING);
+		}
+	}
+
+	if(m_courtyardWinTimer.HasPeriodElapsed())
+	{
+		m_game->ChangeGameState(GameState::WON);
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Map::ApplyEnemyHealthBonus(Actor* actor)
+{
+	if(!actor || !actor->m_definition || !m_areEnemiesEmpowered)
+	{
+		return;
+	}
+
+	if(actor->m_definition->m_faction != Faction::DEMON)
+	{
+		return;
+	}
+
+	// Newly spawned demons come in at the raised ceiling, already full.
+	actor->m_maxHealth += m_enemyHealthBonus;
+	actor->m_health		= actor->m_maxHealth;
+
+	RestoreEnemyEmpoweredDamage(actor);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Map::RestoreEnemyEmpoweredDamage(Actor* actor)
+{
+	if(!actor)
+	{
+		return;
+	}
+
+	// Written to the weapon instance, never the shared static WeaponDefinition, so the
+	// buff dies with this map instead of leaking into the next game.
+	for(Weapon* weapon : actor->m_weaponInventory)
+	{
+		if(!weapon || !weapon->m_weaponDefinition)
+		{
+			continue;
+		}
+
+		FloatRange const& empoweredDamage = weapon->m_weaponDefinition->m_empoweredMeleeDamage;
+
+		if(empoweredDamage.m_max < 0.f)
+		{
+			continue;
+		}
+
+		weapon->m_meleeDamage = empoweredDamage;
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Map::ApplyPlayerProgressionToActor(PlayerController* player, Actor* actor)
+{
+	if(!player || !actor)
+	{
+		return;
+	}
+
+	// SpawnActor only knows the actor definition, so everything the player has earned has
+	// to be re-applied here. Both spawn paths call this so neither can drift.
+	actor->m_health = player->GetMaxHealthFor(actor);
+
+	if(player->m_isPlasmaRifleUnlocked)
+	{
+		actor->AddWeaponByName("PlasmaRifle");
+	}
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------

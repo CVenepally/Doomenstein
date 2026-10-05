@@ -23,7 +23,7 @@ Workspace/
 - One in-game day lasts about 200 real seconds.
 - Capture all four corner rooms first, then capture the courtyard to win.
 - Demons respawn at 00:00 every day, so every night you clear is a night they come back.
-- Dying 3 times is game over.
+- Dying 5 times is game over.
 
 Enemies
 
